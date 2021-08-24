@@ -1,0 +1,15 @@
+@import "base.scss";
+
+.b-nav {
+    display: inline-block;
+
+    .b-navbar {
+        display: inline-block;
+        ul {
+            li {
+                display: inline-block;
+                @include text;
+            }
+        }
+    }
+}
