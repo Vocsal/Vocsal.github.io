@@ -1,0 +1,24 @@
+<header class="b-header">
+    <nav class="b-nav">
+        <span class="b-web-title">
+            <a href="{{ '' | relative_url }}/">{{ site.title }}</a>
+        </span>
+        <div class="b-navbar" id="b-nav">
+            <ul>
+                <li>
+                    <a href="{{ '' | relative_url }}">Home</a>
+                </li>
+                
+                {% assign pages = site.pages | sort: "order" %}
+                {% for page in pages %}
+                {% if page.title %}
+                <li>
+                    <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+            </ul>
+        </div>
+    </nav>
+</header>
