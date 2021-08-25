@@ -17,7 +17,7 @@ layout: default
           <span class="semi-bold">
             {{ page.author | default: site.social.name }}
           </span>
-          {% include timeago.html date=page.date prep="on" tooltip=true %}
+          {% include timeago.html date=page.date prep="发布于" tooltip=true %}
         </div>
 
         <div>
@@ -30,7 +30,7 @@ layout: default
           {% endif %}
 
           <!-- read time -->
-          {% include read-time.html content=content %}
+          {% comment %} {% include read-time.html content=content %} {% endcomment %}
 
           <!-- page views -->
           {% if site.google_analytics.pv.proxy_endpoint or site.google_analytics.pv.cache_path %}
@@ -81,9 +81,9 @@ layout: default
           d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
           {% if site.data.rights.license %}
           <div class="license-wrapper">
-            This post is licensed under
+            该博客文字由作者通过
             <a href="{{ site.data.rights.license.link }}">{{ site.data.rights.license.name }}</a>
-            by the author.
+            进行授权。
           </div>
           {% endif %}
 

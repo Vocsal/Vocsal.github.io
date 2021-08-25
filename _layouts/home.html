@@ -64,9 +64,11 @@ layout: page
         {% include timeago.html date=post.date tooltip=true %}
 
         <!-- time to read -->
+        {% comment %}
         <i class="far fa-clock fa-fw"></i>
         {% include read-time.html content=post.content %}
-
+        {% endcomment %}
+        
         <!-- page views -->
         {% if site.google_analytics.pv.proxy_endpoint or site.google_analytics.pv.cache_path %}
         <i class="far fa-eye fa-fw"></i>

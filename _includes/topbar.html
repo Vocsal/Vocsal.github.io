@@ -10,7 +10,7 @@
 
     {% if paths.size == 0 %}
       <!-- index page -->
-      <span>{{ 'Posts' }}</span>
+      <span>{{ '主页' }}</span>
     {% else %}
 
       {% for item in paths %}
@@ -18,7 +18,7 @@
         {% if forloop.first %}
           {% unless page.layout == 'post' %}
           <span>
-            <a href="{{ '/' | relative_url }}">{{ 'Home' }}</a>
+            <a href="{{ '/' | relative_url }}">{{ '主页' }}</a>
           </span>
           {% endunless %}
 
@@ -32,7 +32,8 @@
             {% assign url = '/' %}
           {% endif %}
           <a href="{{ url | relative_url }}">
-            {{ item | capitalize }}
+              {% comment %} {{ item | capitalize }} {% endcomment %}
+            {{ '主页' }}
           </a>
         </span>
 
