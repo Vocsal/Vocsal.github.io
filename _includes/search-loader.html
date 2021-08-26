@@ -14,7 +14,7 @@
 </div>
 {% endcapture %}
 
-{% capture not_found %}<p class="mt-5">Oops! No result founds.</p>{% endcapture %}
+{% capture not_found %}<p class="mt-5">未找到相关内容，请更换关键字检索。</p>{% endcapture %}
 
 <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script>
 
@@ -22,7 +22,7 @@
 SimpleJekyllSearch({
   searchInput: document.getElementById('search-input'),
   resultsContainer: document.getElementById('search-results'),
-  json: '{{ '/assets/js/data/search.json' | relative_url }}',
+  json: "{{ '/assets/js/data/search.json' | relative_url }}",
   searchResultTemplate: '{{ result_elem | strip_newlines }}',
   noResultsText: '{{ not_found }}',
   templateMiddleware: function(prop, value, template) {

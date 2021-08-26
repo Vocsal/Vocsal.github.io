@@ -32,8 +32,16 @@
             {% assign url = '/' %}
           {% endif %}
           <a href="{{ url | relative_url }}">
-              {% comment %} {{ item | capitalize }} {% endcomment %}
+            {% comment %}{{ item | capitalize }}{% endcomment %}
+            {% if item == 'categories' %}
+            {{ '分类' }}
+            {% elsif item == 'tags' %}
+            {{ '标签' }}
+            {% elsif item == 'posts' %}
             {{ '主页' }}
+            {% else %}
+            {{ item | capitalize }}
+            {% endif %}
           </a>
         </span>
 
