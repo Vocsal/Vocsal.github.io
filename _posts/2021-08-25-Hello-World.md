@@ -8,4 +8,4 @@ tag: []
 
 > "Hello World, Hello Blog."
 
-Vocsal的博客开通了。
+**Vocsal**的博客开通了。
