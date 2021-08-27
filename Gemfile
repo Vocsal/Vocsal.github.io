@@ -34,3 +34,5 @@ end
 # Performance-booster for watching directories on Windows
 gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 
+# Web server for windows platform
+gem "webrick", ">= 1.7.0" if Gem.win_platform?
