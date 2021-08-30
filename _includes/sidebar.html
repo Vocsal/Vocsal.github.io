@@ -49,7 +49,6 @@
   </ul> <!-- ul.nav.flex-column -->
 
   <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center">
-
     {% for entry in site.data.contact %}
       {% capture url %}
         {%- if entry.type == 'github' -%}
@@ -58,7 +57,14 @@
           https://twitter.com/{{ site.twitter.username }}
         {%- elsif entry.type == 'email' -%}
           {% assign email = site.social.email | split: '@' %}
-          javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')
+          {% capture email_suject %}
+            {% if site.email_suject and email %}
+            '?subject=【' + '{{ site.email_suject }}' + '】：(请修改此部分内容为你的主题)'
+            {% else %}
+            ''
+            {% endif %}
+          {% endcapture %}
+          javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@') + {{ email_suject }}
         {%- elsif entry.type == 'rss' -%}
           {{ "/feed.xml" | relative_url }}
         {%- else -%}
