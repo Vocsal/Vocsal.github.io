@@ -4,5 +4,19 @@ icon: fas fa-info
 order: 4
 ---
 
+## 我
 
-> **Note**: Add Markdown syntax content to file `_tabs/about.md` and it will show up on this page.
+大家好，我是Vocsal，2020年计算机专业毕业，目前在互联网前端领域发展，主要学习的方向为Web图形学和大数据前端可视化。
+
+这是我的个人博客网站，里面会分享我的学习成果、一些思考见解和生活。
+
+
+## 推荐
+
+个人比较喜欢下面的作品，也推荐大家去阅读和观看。
+
+- 刘慈欣大牛的《三体》
+
+- 斯坦利·库布里克导演的《2001太空漫游》
+
+- 克里斯托弗·诺兰导演的《星际穿越》
