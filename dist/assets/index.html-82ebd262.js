@@ -1,0 +1,1 @@
+import{_ as o,o as l,c as t,a as e,b as n}from"./app-da0654df.js";const c={},s=e("blockquote",null,[e("p",null,'"Hello World, Hello Blog."')],-1),_=e("p",null,[e("strong",null,"Vocsal"),n("的博客开通了。")],-1),a=[s,_];function r(d,i){return l(),t("div",null,a)}const f=o(c,[["render",r],["__file","index.html.vue"]]);export{f as default};
