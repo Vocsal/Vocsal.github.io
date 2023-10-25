@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-147825fb","path":"/docs/","title":"Hello World","lang":"zh-CN","frontmatter":{"title":"Hello World","date":"2021-08-26 16:00:00 +0800","categories":[],"tag":[]},"headers":[],"git":{"updatedTime":1698141017000,"contributors":[{"name":"voczhang","email":"voczhang@tencent.com","commits":1}]},"filePathRelative":"docs/index.md"}');export{e as data};
