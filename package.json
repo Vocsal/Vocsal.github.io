@@ -1,5 +1,5 @@
 {
-  "name": "Vocsal.github.io",
+  "name": "vocsal.github.io",
   "version": "1.0.0",
   "description": "The Blog Of Vocsal.Code01",
   "main": "index.js",
@@ -7,8 +7,11 @@
   "author": "Vocsal",
   "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev .",
+    "dev": "vuepress dev . --port 9996 --debug",
     "build": "vuepress build ."
+  },
+  "dependencies": {
+    "markdown-it-mathjax3": "^4.3.2"
   },
   "devDependencies": {
     "vuepress": "^2.0.0-beta.67"
