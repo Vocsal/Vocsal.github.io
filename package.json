@@ -1,19 +1,23 @@
 {
-  "name": "vocsal.github.io",
-  "version": "1.0.0",
-  "description": "The Blog Of Vocsal.Code01",
-  "main": "index.js",
-  "repository": "git@github.com:Vocsal/Vocsal.github.io.git",
-  "author": "Vocsal",
-  "license": "MIT",
+  "name": "astro-blog",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "vuepress dev . --port 9996 --debug",
-    "build": "vuepress build ."
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "markdown-it-mathjax3": "^4.3.2"
-  },
-  "devDependencies": {
-    "vuepress": "^2.0.0-beta.67"
+    "@astrojs/check": "^0.3.1",
+    "@astrojs/mdx": "^2.0.0",
+    "@astrojs/rss": "^4.0.1",
+    "@astrojs/sitemap": "^3.0.3",
+    "astro": "^4.0.3",
+    "katex": "^0.16.9",
+    "rehype-katex": "^7.0.0",
+    "remark-math": "^6.0.0",
+    "typescript": "^5.3.3"
   }
 }
