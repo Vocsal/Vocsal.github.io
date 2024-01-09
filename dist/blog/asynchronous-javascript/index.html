@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicons/favicon.ico"><meta name="generator" content="Astro v4.0.3"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://blog.code01.cn/blog/asynchronous-javascript/"><!-- Primary Meta Tags --><title>异步过程中try catch处理</title><meta name="title" content="异步过程中try catch处理"><meta name="description" content="异步过程中try catch处理"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.code01.cn/blog/asynchronous-javascript/"><meta property="og:title" content="异步过程中try catch处理"><meta property="og:description" content="异步过程中try catch处理"><meta property="og:image" content="https://blog.code01.cn/blog-placeholder-1.jpg"><!-- Twitter --><!-- <meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} /> --><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}@font-face{font-family:Atkinson;src:url(/fonts/atkinson-regular.woff) format("woff");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:Atkinson;src:url(/fonts/atkinson-bold.woff) format("woff");font-weight:700;font-style:normal;font-display:swap}body{font-family:Atkinson,sans-serif;margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:3.052em}h2{font-size:2.441em}h3{font-size:1.953em}h4{font-size:1.563em}h5{font-size:1.25em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0;font-size:1.333em}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media (max-width: 720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:white;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media (max-width: 720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}.social-links[data-astro-cid-sz7xmlte] img[data-astro-cid-sz7xmlte]{width:32px;height:32px;border-radius:50%}.social-links[data-astro-cid-sz7xmlte] img[data-astro-cid-sz7xmlte]:hover{transform:scale(1.1)}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Vocsal Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> Blog </a>   <a href="/about" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/Vocsal" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Vocsal's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img width="1020" height="510" src="/images/blog-placeholder-4.jpg" alt="" data-astro-cid-bvzihdzo> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 data-astro-cid-bvzihdzo>异步过程中try catch处理</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2023-06-16T08:00:00.000Z"> 2023年6月16日 </time>  </div> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="一异步过程在-web-开发中的重要性">一、异步过程在 web 开发中的重要性</h2>
+<ol>
+<li>
+<p><strong>提高响应性能</strong>：通过使用异步操作，可以在后台执行耗时的任务，而不会阻塞用户界面。这样可以确保用户能够流畅地与网页进行交互，而不会因为等待任务完成而出现冻结或卡顿的现象。常见的异步操作包括网络请求、文件上传、数据处理和计算等。</p>
+</li>
+<li>
+<p><strong>改善用户体验</strong>：通过异步加载内容，例如图片、音频、视频或其他资源，可以加快页面加载速度，并提供更好的用户体验。异步加载可以避免长时间等待大量资源下载完毕，使用户能够更快地浏览和交互网页。</p>
+</li>
+<li>
+<p><strong>实现实时更新</strong>：异步过程使得实时数据更新成为可能。通过使用轮询、长轮询、WebSocket 或服务器推送等技术，我们可以实时获取服务器端的数据更新，并在客户端及时地反映这些变化，从而实现实时性的应用程序，例如聊天应用、实时协作工具等。</p>
+</li>
+<li>
+<p><strong>并行处理</strong>：异步操作可以在同时进行多个任务，从而提高系统的并行处理能力。这对于处理大量数据、并发请求或复杂计算等场景非常有用。通过合理地使用异步过程，我们可以提高系统的性能和吞吐量。</p>
+</li>
+<li>
+<p><strong>提高可维护性和扩展性</strong>：异步操作的模块化和可组合性使得代码更易于维护和扩展。通过将任务拆分为小的异步操作，并使用适当的异步处理技术（如 Promise、async/await 等），我们可以将复杂的任务分解为更小的模块，提高代码的可读性、可维护性和重用性。</p>
+</li>
+</ol>
+<h2 id="二异步过程中-try-catch-的作用">二、异步过程中 try catch 的作用</h2>
+<ol>
+<li>
+<p><strong>异常捕获</strong>：try-catch 允许我们在异步代码块中捕获和处理异常。当异步操作中发生错误或抛出异常时，try 块中的代码将被执行，而 catch 块中的代码将负责处理异常。这样可以避免异常在异步操作中传播并导致整个应用崩溃或出现意外行为。</p>
+</li>
+<li>
+<p><strong>错误处理</strong>：通过 try-catch 语句，我们可以及时处理异步操作中的错误，从而提供更好的用户体验。当异步操作失败或产生错误时，我们可以在 catch 块中执行适当的操作，例如向用户显示错误信息、记录错误日志或采取其他补救措施。</p>
+</li>
+<li>
+<p><strong>错误传递</strong>：try-catch 语句还允许我们将捕获的错误传递给上层调用或其他处理逻辑。这对于异步操作链中的错误处理非常有用。通过在 catch 块中重新抛出错误，我们可以将错误传递给下一个错误处理器或全局错误处理机制，以便进一步处理或进行适当的错误处理。</p>
+</li>
+<li>
+<p><strong>异常信息收集</strong>：使用 try-catch 语句，我们可以捕获并获取有关异常的详细信息，例如错误消息、堆栈跟踪等。这些信息对于调试和排查问题非常有帮助，可以帮助开发人员更好地理解发生的错误，并进行更准确的故障排除。</p>
+</li>
+</ol>
+<h2 id="三try-catch-的性能相关">三、try catch 的性能相关</h2>
+<ol>
+<li>
+<p><strong>执行时间</strong>：try-catch 块的执行会引入额外的成本，因为在 try 块中发生异常时，需要执行额外的操作来捕获和处理异常。这可能会导致代码的执行时间延长。在相同的代码逻辑下，不使用 try-catch 通常会更快。</p>
+</li>
+<li>
+<p><strong>堆栈跟踪</strong>：当异常被抛出时，try-catch 语句会生成堆栈跟踪信息，用于追踪异常发生的位置。生成堆栈跟踪信息可能会带来一些性能开销，尤其是当代码中频繁抛出异常时。不使用 try-catch 可以减少堆栈跟踪的生成。</p>
+</li>
+<li>
+<p><strong>V8 引擎优化</strong>：对于某些 JavaScript 引擎（如 V8），存在一种称为“优化退化（deoptimization）”的机制。当代码中包含 try-catch 语句时，引擎可能会减少对代码的优化，从而影响代码的执行性能。这是因为 try-catch 可能会导致一些优化技术无法应用于代码块。</p>
+</li>
+</ol>
+<h2 id="四异步过程中错误处理的实践与优化">四、异步过程中错误处理的实践与优化</h2>
+<ol>
+<li><strong>使用 Promise 的 catch 方法</strong>：使用 promise.catch 方法可以不抛出异常，且不中断程序，这样有利于代码逻辑的运行，处理一些非必要异常，如下面示例：</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#E1E4E8">loading.value </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> res </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> getList</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">catch</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> (loading.value </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">res) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">// 请求成功后正常操作</span></span></code></pre>
+<ol start="2">
+<li><strong>转换异步过程，使其不抛出异常</strong>：将异步过程的返回结果和异常错误组合成一个数组进行返回，这样有两种情况，成功为<code>[data, undefined]</code>，异常时为<code>[undefined, error]</code>，这样可以确保转换后的异步过程不会有异常，且可让使用方自行觉得是否处理异常，封装方法如下：</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color:#6A737D">/** 获取Promise Resolved值的类型 */</span></span>
+<span class="line"><span style="color:#F97583">type</span><span style="color:#B392F0"> PromiseResolvedType</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> T</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Promise</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">infer</span><span style="color:#B392F0"> R</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">?</span><span style="color:#B392F0"> R</span><span style="color:#F97583"> :</span><span style="color:#79B8FF"> never</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">/** 获取异步函数resolved返回值类型 */</span></span>
+<span class="line"><span style="color:#F97583">type</span><span style="color:#B392F0"> ReturnedPromiseResolvedType</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> PromiseResolvedType</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">ReturnType</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>>;</span></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * 异步函数持续化，不会抛出错误，不会终止流程</span></span>
+<span class="line"><span style="color:#6A737D"> * </span><span style="color:#F97583">@param</span><span style="color:#E1E4E8"> promiseFn</span><span style="color:#6A737D"> 异步函数</span></span>
+<span class="line"><span style="color:#6A737D"> * </span><span style="color:#F97583">@returns</span><span style="color:#6A737D"> [异步结果，undefined] 或者 [undefined, error]</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> promiseCatcher</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#F97583"> extends</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">...</span><span style="color:#FFAB70">args</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">[]) </span><span style="color:#F97583">=></span><span style="color:#B392F0"> Promise</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">any</span><span style="color:#E1E4E8">>>(</span></span>
+<span class="line"><span style="color:#FFAB70">  promiseFn</span><span style="color:#F97583">:</span><span style="color:#B392F0"> T</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#F97583">  ...</span><span style="color:#FFAB70">args</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Parameters</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#B392F0"> Promise</span><span style="color:#E1E4E8">&#x3C;[</span><span style="color:#B392F0">ReturnedPromiseResolvedType</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>, </span><span style="color:#B392F0">Error</span><span style="color:#E1E4E8">]> {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#F97583"> async</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">...</span><span style="color:#FFAB70">params</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Parameters</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> result</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> promiseFn.</span><span style="color:#B392F0">call</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">...</span><span style="color:#E1E4E8">params);</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> [result, </span><span style="color:#79B8FF">undefined</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (error) {</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">undefined</span><span style="color:#E1E4E8">, error];</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="五总结">五、总结</h2>
+<ol>
+<li>
+<p><strong>在关键代码段使用 try-catch</strong>：仅在关键代码段中使用 try-catch，而不是在整个应用的每个地方都使用。这可以减少 try-catch 的执行次数。</p>
+</li>
+<li>
+<p><strong>精确捕获特定类型的异常</strong>：尽量精确地捕获与当前上下文相关的异常，避免不必要的通用异常捕获。这有助于减少 try-catch 的执行和性能开销。</p>
+</li>
+<li>
+<p><strong>错误处理的异步优化</strong>：对于异步操作，使用适当的错误回调函数（error-first callback）或 Promise 的 catch 方法来处理错误。这样可以避免使用 try-catch 捕获异步操作中的错误。</p>
+</li>
+<li>
+<p><strong>运行时环境优化</strong>：了解你所使用的 JavaScript 引擎的特点，例如 V8 引擎的优化机制。了解引擎的行为可以帮助你更好地优化和调整代码。</p>
+</li>
+</ol>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2024 Vocsal here. All rights reserved. Supported
+  by <a href="https://astro.build" target="_blank" data-astro-cid-sz7xmlte>Astro</a>.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://github.com/Vocsal" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Go to Vocsal's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="mailto:code01.cn@gmail.com?subject=%E3%80%90blog%E3%80%91%3A%20&body=From%20blog.code01.com%3A%0A%0A" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Vocsal Email</span> <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg" data-astro-cid-sz7xmlte><path fill="currentColor" d="M153.236734 163.111422l714.763665 0c48.810633 0 88.718697 38.475467 89.332667 85.853503l-446.458679 242.518237L64.313381 249.169581C64.722694 201.689218 104.323773 163.111422 153.236734 163.111422L153.236734 163.111422zM64.313381 341.981413l-0.409313 429.062856c0 47.787349 40.215049 86.876786 89.332667 86.876786l714.763665 0c49.117618 0 89.332667-39.089437 89.332667-86.876786L957.333067 341.776756 521.311882 573.038873c-6.651344 3.581493-14.735285 3.581493-21.386629 0L64.313381 341.981413 64.313381 341.981413zM64.313381 341.981413" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://puppetsho.icu/" target="_blank" title="Puppetsho's blog" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Puppetsho's blog</span> <img src="https://github.com/Kuhakucai.png?size=48" data-astro-cid-sz7xmlte> </a> </div> </footer>  </body></html>
