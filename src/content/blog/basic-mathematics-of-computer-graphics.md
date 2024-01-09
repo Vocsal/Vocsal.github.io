@@ -2,7 +2,7 @@
 title: "计算机图形学基础"
 description: "本文介绍计算机图形学相关基础知识，涉及到部分数学知识"
 pubDate: 2021-09-14 20:30:00 +0800
-heroImage: "/blog-placeholder-2.jpg"
+heroImage: "/images/blog-placeholder-2.jpg"
 categories: [图形学]
 tag: []
 math: true
@@ -21,7 +21,7 @@ $$
 推导如下：
 
 <div align=center>
-<img src="/images/二维XY坐标系旋转.png" style="width: 60%" />
+<img src="/images/basic-mathematics-of-computer-graphics/二维XY坐标系旋转.png" style="width: 60%" />
 </div>
 
 $$
@@ -158,7 +158,7 @@ $$
 - 绕经过原点的直线旋转角度$\theta$，如图，旋转轴可通过*单位向量*获取相关值
 
 <div align=center>
-<img src="/images/三维XYZ坐标系旋转.png" style="width: 60%" />
+<img src="/images/basic-mathematics-of-computer-graphics/三维XYZ坐标系旋转.png" style="width: 60%" />
 </div>
 
 1.将旋转轴 OA 旋转至 YOZ 平面内，即 OA 绕 y 轴 旋转角度 $\alpha$ ，变换矩阵如下

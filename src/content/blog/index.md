@@ -2,7 +2,7 @@
 title: "Hello World"
 description: "First Blog."
 pubDate: 2021-08-26 16:00:00 +0800
-heroImage: "/blog-placeholder-1.jpg"
+heroImage: "/images/blog-placeholder-1.jpg"
 ---
 
 > "Hello World, Hello Blog."
