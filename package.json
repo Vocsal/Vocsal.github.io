@@ -2,6 +2,7 @@
   "name": "astro-blog",
   "type": "module",
   "version": "0.0.1",
+  "homepage": "https://blog.code01.cn",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
