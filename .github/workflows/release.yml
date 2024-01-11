@@ -32,4 +32,4 @@ jobs:
           REMOTE_PORT: ${{ secrets.SSH_REMOTE_PORT }}
           SOURCE: "dist/"
           TARGET: ${{ secrets.SERVER_TARGET }}
-          SCRIPT_BEFORE: "${{ secrets.SERVER_SYNC_SCRIPT }} ${{ secrets.SERVER_TARGET }}"
+          SCRIPT_BEFORE: "bash ${{ secrets.SERVER_SYNC_SCRIPT }} ${{ secrets.SERVER_TARGET }}"
