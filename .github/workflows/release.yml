@@ -1,0 +1,35 @@
+name: Deploy Blog To code01
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: 构建部署
+    runs-on: ubuntu-latest
+    steps:
+      - name: 切换分支
+        uses: actions/checkout@v4
+      - name: 安装node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: 安装依赖
+        run: npm install
+      - name: 构建项目
+        run: npm run build
+      - name: 部署到服务器
+        uses: easingthemes/ssh-deploy@v5
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_SERVER_IP }}
+          REMOTE_USER: ${{ secrets.SSH_SERVER_USER }}
+          REMOTE_PORT: ${{ secrets.SSH_REMOTE_PORT }}
+          SOURCE: "dist/"
+          TARGET: ${{ secrets.SERVER_TARGET }}
+          ARGS: "-rlgoDzvc -i --delete"
