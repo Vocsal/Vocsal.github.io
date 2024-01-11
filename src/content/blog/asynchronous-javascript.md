@@ -2,7 +2,7 @@
 title: "异步过程中try catch处理"
 description: "异步过程中try catch处理"
 pubDate: 2023-06-16 16:00:00 +0800
-heroImage: "/images/blog-placeholder-4.jpg"
+heroImage: "/images/blog-placeholder-2.jpg"
 categories: [JavaScript]
 tag: [JavaScript]
 ---
