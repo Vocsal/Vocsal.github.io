@@ -1,8 +1,8 @@
 {
-  "name": "astro-blog",
+  "name": "vocsal-blog",
   "type": "module",
   "version": "0.0.1",
-  "homepage": "https://blog.code01.cn",
+  "homepage": "https://blog.code01.site",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
