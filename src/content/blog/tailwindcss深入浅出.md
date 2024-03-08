@@ -6,6 +6,10 @@ heroImage: "/images/blog-placeholder-3.jpg"
 ---
 
 > 只需 HTML 即可快速构建现代网站
+>
+> tailwindcss 官网：https://tailwindcss.com
+>
+> 中文文档：https://tailwind.nodejs.cn
 
 ## 前言
 
@@ -74,6 +78,17 @@ npx tailwindcss init
 
 2. 在配置文件中增加内容文件
 
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./index.html", "./src/**/*.{html,js}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
 3. 在 css 入口文件中增加 tailwind 指令
 
 ```css
@@ -111,7 +126,7 @@ npx tailwindcss -i input.css -o output.css --watch
 1. 创建项目
 
 ```shell
-npm create vite@latest vite-demo -- --template vue
+npm create vite@latest vite-demo --template vue
 cd vite-demo
 npm install
 ```
