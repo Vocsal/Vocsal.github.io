@@ -6,7 +6,7 @@ import rehypeKatex from "rehype-katex";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://blog.code01.cn",
+  site: "https://blog.code01.cc",
   server: {
     port: 6999,
   },

@@ -2,7 +2,7 @@
   "name": "vocsal-blog",
   "type": "module",
   "version": "0.0.1",
-  "homepage": "https://blog.code01.site",
+  "homepage": "https://blog.code01.cc",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

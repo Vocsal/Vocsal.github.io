@@ -22,7 +22,7 @@ WebGPU 是最新的 Web3D 图形 API，更加直接对 GPU 进行编程，降低
 
 ## 二、3D 实例
 
-[Solar 3D](https://www.code01.cn/solar3d/index.html) -[Github](https://github.com/Vocsal/Solar3D)
+[Solar 3D](https://www.code01.cc/solar3d/index.html) -[Github](https://github.com/Vocsal/Solar3D)
 
 太阳系 3D 系统，具有同步卫星、飞行、轨道三个视角，模拟太阳系行星运转。
 
@@ -133,7 +133,7 @@ Muse 3D 空间，展示个人作品，模拟真实的访客场景。
           75,
           window.innerWidth / window.innerHeight,
           0.1,
-          50
+          50,
         );
         camera.position.set(0, 0, 30);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -144,7 +144,7 @@ Muse 3D 空间，展示个人作品，模拟真实的访客场景。
           new THREE.BoxGeometry(10, 10, 10),
           new THREE.MeshPhongMaterial({
             color: 0x156289,
-          })
+          }),
         );
         scene.add(box);
 
