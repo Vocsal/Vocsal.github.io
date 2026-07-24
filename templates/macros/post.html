@@ -1,0 +1,10 @@
+{% macro post_meta(page) %}
+<div class="post-meta">
+  <time datetime="{{ page.date | date(format="%Y-%m-%d") }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
+  {% if page.taxonomies.tags is defined and page.taxonomies.tags | length > 0 %}
+  <span class="tag-list">
+    {% for tag in page.taxonomies.tags %}<span class="tag-chip">{{ tag }}</span>{% endfor %}
+  </span>
+  {% endif %}
+</div>
+{% endmacro post_meta %}

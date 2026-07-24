@@ -1,0 +1,17 @@
+{% import "macros/post.html" as post_macros %}
+{% extends "base.html" %}
+
+{% block title %}文章 · {{ config.title }}{% endblock title %}
+
+{% block content %}
+<h1>文章</h1>
+<ul class="post-list">
+  {% for page in section.pages %}
+  <li class="post-list-item">
+    <h2 class="post-list-item__title post-title"><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
+    {{ post_macros::post_meta(page=page) }}
+    <p class="post-list-item__description">{{ page.description }}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content %}

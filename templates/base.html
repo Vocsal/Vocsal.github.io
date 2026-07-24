@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
+    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ config.title }}" href="{{ get_url(path="rss.xml") }}">
+    <link rel="icon" href="{{ get_url(path="favicon.svg") }}" type="image/svg+xml">
+    {% block extra_head %}{% endblock extra_head %}
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a class="site-nav__home" href="{{ get_url(path="@/_index.md") }}">{{ config.title }}</a>
+      <a class="site-nav__link" href="{{ get_url(path="@/blog/_index.md") }}">文章</a>
+    </nav>
+    <main class="site-main">
+      {% block content %}{% endblock content %}
+    </main>
+    <footer class="site-footer">
+      <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author }}</p>
+    </footer>
+  </body>
+</html>

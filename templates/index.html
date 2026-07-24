@@ -1,0 +1,22 @@
+{% import "macros/post.html" as post_macros %}
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ config.title }}</h1>
+{% if section.extra.intro %}
+<p class="site-intro">{{ section.extra.intro }}</p>
+{% endif %}
+
+{% set blog = get_section(path="blog/_index.md") %}
+<h2>最新文章</h2>
+<ul class="post-list">
+  {% for page in blog.pages | slice(end=5) %}
+  <li class="post-list-item">
+    <h3 class="post-list-item__title post-title"><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h3>
+    {{ post_macros::post_meta(page=page) }}
+  </li>
+  {% endfor %}
+</ul>
+
+<p><a class="post-link-more" href="{{ get_url(path="@/blog/_index.md") }}">查看全部文章 →</a></p>
+{% endblock content %}
